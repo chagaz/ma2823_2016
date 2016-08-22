@@ -1,3 +1,16 @@
+# LaTeX compile files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+
+# Temporary files
+*~
+
+# Jupyter checkpoints
+lab_notebooks/.ipynb_checkpoints
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
