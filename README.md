@@ -17,6 +17,7 @@ Follow instructions at https://jupyter-notebook-beginner-guide.readthedocs.io/en
 * Make your changes to the LaTeX file for the chapter you're in charge of. 
 * Compile the PDF.
 * When the chapter is ready, make a pull request -- see https://help.github.com/articles/using-pull-requests/ 
+* For more detailed instructions on how to do the above steps, see http://cazencott.info/dotclear/public/lectures/ma2823_2016/lecture-notes-git-instructions.pdf
 * You might want to use [Overleaf](https://www.overleaf.com), a collaborative LaTeX editing platform, which also facilitates compiling and real-time previews.
 * Follow the example given for Chapter 2.
 
