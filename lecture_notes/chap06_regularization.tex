@@ -66,7 +66,7 @@ In this chapter we will see:
 
 \section{Regression setting}
 \subsection{Large $p$, small $n$}
-This section is a reminder of the context in which we work. We consider a dataset that has $p$ features and $n$ samples. Thus, we're working with a data matrix $X$ that have $n$ rows and $p$ columns. The outcome vector $y$ describes the quantity we want to predict. The goal of the linear regression model is to approximate $y$ as a linear combination of $X$.
+This section is a reminder of the context in which we work. We consider a dataset that has $p$ features and $n$ samples. Thus, we're working with a data matrix $X$ that have $n$ rows and $p$ columns. The outcome vector $y$ describes the quantity we want to predict. The goal of linear regression model is to approximate $y$ as a linear combination of $X$.
 \begin{figure}[!h]
 \centerline{
 \includegraphics[scale = 0.3]{figures/RegressionSettings.png}}
@@ -76,11 +76,11 @@ This section is a reminder of the context in which we work. We consider a datase
 
 On the Figure \ref{DataMatrix}, we can see that the data matrix is taller than it is wide ($p < n$). This is a  common shape. But, conversed settings can also appear. 
 
-This configuration is called large $p$, small $n$. The data matrix is wider than it is tall. This is the kind of settings we have in genetics and neuroimaging: we have many more descriptors than we have data points. For instance, in genetics, a data set can gather informations for thousands of genes as this information is easy to access. Yet, as each row holds data gathered on a patient, we have at best hundreds of patients. Thus, we have a tall but not wide data matrix. In neuroimaging, brain images are big objets, typically thousands pixels or voxels (3D images). Yet, as brainscans are costly to obtain, we repeat the process on thousands of patient. Thus, we'll have more features than observations. In this configuration, we are going to need regularization.
+This configuration is called large $p$, small $n$. The data matrix is wider than it is tall. This is the kind of settings we have in genetics and neuroimaging: we have many more descriptors than we have data points. For instance, in genetics, a data set can gather informations for thousands of genes as this information is easy to access. Yet, as each row holds data gathered on a patient, we have at best hundreds of patients. Thus, we have a wide but not tall data matrix. In neuroimaging, brain images are big objets, typically thousands pixels or voxels (3D images). Yet, as brainscans are costly to obtain, we repeat the process on thousands of patient only. Thus, we have more features than observations. In this configuration, regularization is usefull.
 
 \subsection{Linear regression}
 \subsubsection{Pro and cons of least-squares fit}
-Linear regression is aimed at approximating $y$ as a linear combination of X. In the previous chapter, we said that, if we're doing a least-squares fit (which is equivalent to Maximum Likelihood estimation under the assumption of Gaussian noise), we obtain this solution
+Linear regression is aimed at approximating $y$ as a linear combination of $X$. In the previous chapter, we said that, if we're doing a least-squares fit (which is equivalent to Maximum Likelihood estimation under the assumption of Gaussian noise), we obtain this solution
 \begin{equation}
 \hat{\beta} = \arg\min_{\beta} (y-X\beta)^{T} (y-X\beta) = (X^T X)^{-1} X^T y.
 \label{LR}
@@ -104,10 +104,10 @@ Yet, this fit has also some drawbacks.
 
 \subsubsection{When $p$ in larger than $n$}
 \label{LargeP}
-When $X^T X$ is not invertible, we still have ways to find $\hat{\beta}$. In this case, we can use the pseudo-inverse of $X$. We can also use numerical methods to solve a linear system of $p$ equations such as gradient descent (minimizing a convexe function), Gaussian elimination or LU decomposition.
+When $X^T X$ is not invertible, we still have ways to find $\hat{\beta}$. In this case, we can use the pseudo-inverse of $X$. We can also use numerical methods to solve a linear system of $p$ equations such as gradient descent (aimed at minimizing a convexe function), Gaussian elimination or LU decomposition.
 On the Figure \ref{LRPseudoInverse}, we can compare the predicted coefficient (thanks to a linear regression using pseudo-inverse) and the true coefficient when $p = 1000$ and $n = 10$. So, we're in the case of the large $p$, small $n$ configuration. In fact, the outcome vector $y$ was created by a linear combination of the data-matrix $X$ using the weights shown on the left hand graph. 
 
-The objectif was to retrieve those weights using a linear regression on the vectors $X$ and $y$. 10 causal features were highlighted in orange on both graphs. A good approximation would be to use only those 10 causal features. Nevertheless, as the right hand graph shows, the linear regression gives coefficients that have approximately the same weight. The causal features are lost entirely in the noise created by the others coefficients. Information has been lost. Regularization is a way of addressing this issue.
+The objectif was to retrieve those weights using a linear regression on the vectors $X$ and $y$. $10$ causal features were highlighted in orange on both graphs. A good approximation would be to use only those $10$ causal features. Nevertheless, as the right hand graph shows, the linear regression gives coefficients that have approximately the same weight. The causal features are lost entirely in the noise created by the others coefficients. Information has been lost. Regularization is a way of addressing this issue.
 
 \begin{figure}[!h]
 \centerline{
@@ -149,7 +149,7 @@ If $\lambda > 0$, $(X^T X + \lambda I)$ is invertible, then
 
 \subsubsection{Solution path}
 \label{SectionSolutionPathRR}
-We've said in section \ref{CVlambda} that we can find the optimal value of $\lambda$ by cross-validation. We can compute solution paths (Figure \ref{SolutionPathRR}) that is a plot showing how the feature coefficient evolves when we decrease the value of $\lambda$. Indeed, when $\lambda = 0$, there's no regularization anymore. And, if $\lambda \gg 1$, we only want to minimize the model complexity. So, all coefficient are then equal to $0$. Then, on the Figure \ref{SolutionPath}, on the left hand, we start with the model in which all coefficients are equal to zero and we end, on the right hand, with the linear regression without any regularization model.
+We've said in section \ref{CVlambda} that we can find the optimal value of $\lambda$ by cross-validation. We can compute solution paths (Figure \ref{SolutionPathRR}) that is a plot showing how the feature coefficient evolves when we decrease the value of $\lambda$. Indeed, when $\lambda = 0$, there's no regularization anymore. And, if $\lambda \gg 1$, we only want to minimize the model complexity. So, all coefficient are then equal to $0$. Then, on the Figure \ref{SolutionPathRR}, on the left hand, we start with the model in which all coefficients are equal to zero and we end, on the right hand, with the linear regression without any regularization model.
 
 The vertical red line shows the value of $\lambda$ that was obtained by cross-validation. The goal is to choose the value of $\lambda$ that gives the best generalization on another set of data.
 \begin{figure}[!h]
@@ -243,7 +243,7 @@ Under the constraint that $||\beta||_1^2 \leq t, \lambda(||\beta||_1^2 - t) \leq
 Thus, the two problems are equivalent.
 \end{proof}
 \subsubsection{Solution path}
-As we did before in Section \ref{SectionSolutionPathRR} for the Ridge Regression estimator, we can also compute solution paths for the Lasso estimator (Figure \ref{SolutionPathLasso}). On the left hand of the graph, we start with high values of $\lambda$ that give very simple models. We move towards lower values of $\lambda$ that gives more complex models. Yet, there's one difference with the ridge regression solution path. In fact, we see here that our features enter the model one by one: their weight is equal to $0$ for all values of $\lambda$ lower to a certain $\lambda_0$. For instance, here, when the model complexity increases, features ``enter'' the model in this order: \texttt{lcavol}, \texttt{lweight}, \texttt{svi}, \ldots, \texttt{gleason}. Thus, at every stage, we have a \emph{sparse model}. For example, on the vertical red line, we have a model with only $5$ parameters that are not null (\texttt{lcavol}, \texttt{svi}, \texttt{lweight}, \texttt{pgg45}, \texttt{lbph}).
+As we did before in Section \ref{SectionSolutionPathRR} for the Ridge Regression estimator, we can also compute solution paths for the Lasso estimator (Figure \ref{SolutionPathLasso}). On the left hand of the graph, we start with high values of $\lambda$ that give very simple models. We move towards lower values of $\lambda$ that gives more complex models. Yet, there's one difference with the ridge regression solution path. In fact, we see here that our features ``enter the model one by one'': their weight is equal to $0$ for all values of $\lambda$ lower to a certain $\lambda_0$. For instance, here, when the model complexity increases, features ``enter'' the model in this order: \texttt{lcavol}, \texttt{lweight}, \texttt{svi}, \ldots, \texttt{gleason}. Thus, at every stage, we have a \emph{sparse model}. For example, on the vertical red line, we have a model with only $5$ parameters that are not null (\texttt{lcavol}, \texttt{svi}, \texttt{lweight}, \texttt{pgg45}, \texttt{lbph}).
 
 \subsubsection{Forward stepwise regression}
 We just saw that, in the lasso regularization, the features are ``entering'' the model one by one. Then, we can also get the lasso solution by using forward stepwise regression: the model is built sequentially by adding one variable at a time. Then, this a greedy method.
@@ -254,7 +254,7 @@ We just saw that, in the lasso regularization, the features are ``entering'' the
 \end{itemize}
 
 \subsubsection{Least Angle Regression}
-The computation of the lasso solution is a quadratic problem, and can be tackled by standard algorithms. But, the least angle regression algorithm is better approach. In the previous section, when a variable and its weight was added in the model, and this weight was never updated. The least angle regression procedure follow the same general scheme, but doesn't add a feature fully into the model. Here, at each step, ``only as much of a variable as needed'' is added. In fact, the coefficient of that feature is increased only until that feature is no longer the one most correlated with the residual $r$. This algorithms can be described as follow
+The computation of the lasso solution is a quadratic problem, and can be tackled by standard algorithms. But, the least angle regression algorithm is a better approach. In the previous section, when a variable and its weight was added in the model, and this weight was never updated. The least angle regression procedure follow the same general scheme, but doesn't add a feature fully into the model. Here, at each step, ``only as much of a variable as needed'' is added. In fact, the coefficient of that feature is increased only until that feature is no longer the one most correlated with the residual $r$. This algorithms can be described as follow
 \begin{enumerate}
 \item Standardize the features to have mean zero and unit norm. Start with the residual $r = y - \bar{y}$ and $\beta_1, \ldots, \beta_p = 0$. The residual is ``what is left to explain from our model''. The perfect model would have a residual that is equal to $0$.
 \item Find the one feature that explains $r$ the most. In other words, find the feature $x_j$ most correlated with $r$.
@@ -346,7 +346,7 @@ Other regularizations exist :
 \end{itemize}
 
 \section{Conclusion}
-We've replaced the minimization of the sum of squared errors (that gave us the solution of the linear regression problem) by minimizing the sum of squared errors and regularizer that penalizes the model complexity. We've seen 3 major forms of regularizers:
+We've replaced the minimization of the sum of squared errors (that gave us the solution of the linear regression problem) by minimizing the sum of squared errors \emph{plus} a regularizer that penalizes the model complexity. We've seen 3 major forms of regularizers:
 \begin{itemize}
 \item Ridge regression ($L^2$ norm)
 	\begin{itemize}
