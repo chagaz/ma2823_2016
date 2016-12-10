@@ -47,9 +47,9 @@ Chapter 5 : Linear Regression
 \end{center}
 
 \noindent
-Lecturer : Chlo\'e-Agathe Azencott   
+Lecturer : Chlo\'e-Agathe Azencott
 \hfill
-Scribes : Emilie Leblanc, Antoine Salon, Hippolyte Jacomet 
+Scribes : Emilie Leblanc, Antoine Salon, Hippolyte Jacomet
 
 \noindent
 \rule{\textwidth}{1pt}
@@ -74,7 +74,7 @@ regression.
 
 In this chapter we would like to define different ways of building estimators that are part of a statistical model, and how to assess their performances.
 
-\paragraph{Definitions and notations} Let us consider a training set of $n$ $p$-dimensional vectors denoted by $\mathcal{X}=\{x^i\}_{i=1,\dots,n}$, and let's assume that each of these observation follows a law of probability given a parameter $\theta$. 
+\paragraph{Definitions and notations} Let us consider a training set of $n$ $p$-dimensional vectors denoted by $\mathcal{X}=\{x^i\}_{i=1,\dots,n}$, and let's assume that each of these observation follows a law of probability given a parameter $\theta$.
 
 \[
 \forall i \in [1,\dots,n],\ \xx^{i}\sim{}p(\xx|\theta)
@@ -125,9 +125,9 @@ Which yields the MLE of $p_0$ :
 
 \subsubsection{Multinomial density}
 
-Let us consider $K$ mutually exclusive and exhaustive classes. The probability for each class to occur is $p_k$, with $\sum_{k=1}^Kp_k=1$. We represent these classes with $K$ indicator variables $x_1, x_2, \dots, x_K$ knowing 
+Let us consider $K$ mutually exclusive and exhaustive classes. The probability for each class to occur is $p_k$, with $\sum_{k=1}^Kp_k=1$. We represent these classes with $K$ indicator variables $x_1, x_2, \dots, x_K$ knowing
 \[
-    x_k= 
+    x_k=
 \begin{cases}
     1& \text{if the outcome is class } k\\
     0              & \text{otherwise}
@@ -141,7 +141,7 @@ Let us compute the MLE $\bm{\hat{p}}=(\hat{p_1},\dots,\hat{p_K})$. The observati
 \[\mathcal{L}(\bm p|\mathcal{X})=\sum_{i=1}^n\sum_{k=1}^K x_k^i\log p_k
 \]\\
 And we now have to maximize it under the constraint $\displaystyle\sum_{k=1}^Kp_k=1$.\\
-We must call on to a Lagrange multiplier $\lambda$ and define the Lagrangian function 
+We must call on to a Lagrange multiplier $\lambda$ and define the Lagrangian function
 \[\mathcal{F} : (\bm p, \lambda) \mapsto \mathcal{L}(\bm p|\mathcal{X})-\lambda \left(\sum_{k=1}^Kp_k - 1\right)\]
 Setting its gradient to zero gently yields a system of equations from which we are happy to learn that $\lambda=n$ and consequently that
 
@@ -150,7 +150,7 @@ Setting its gradient to zero gently yields a system of equations from which we a
 
 \subsubsection{Gaussian distribution}
 
-Let us now assume that our observations $x^i$ are i.i.d. following a Gaussian distribution, i.e. : 
+Let us now assume that our observations $x^i$ are i.i.d. following a Gaussian distribution, i.e. :
 
 $\forall i \in [1,\dots,n]$,
 \[x^i\sim\mathcal{N}(\mu,\sigma^2)\]
@@ -169,10 +169,10 @@ We can assess the performance of the estimator (be it obtain through MLE or anot
 
 \[\mbox{MSE}(\hat{\theta}) = \mathbb{E}[(\hat{\theta}-\theta_0)^2]\]
 
-\paragraph{Bias-variance trade-off} Let us try to link this MSE to two previously known notions that help characterize our estimator, the variance and the bias. As a reminder, the {\em bias} of an estimator is the difference between this estimator's expected value and the true value of the parameter being estimated : $\mbox{Bias}(\hat{\theta})=\mathbb{E}[\hat{\theta}]-\theta_0$. 
+\paragraph{Bias-variance trade-off} Let us try to link this MSE to two previously known notions that help characterize our estimator, the variance and the bias. As a reminder, the {\em bias} of an estimator is the difference between this estimator's expected value and the true value of the parameter being estimated : $\mbox{Bias}(\hat{\theta})=\mathbb{E}[\hat{\theta}]-\theta_0$.
 
 \begin{align*}
-\mbox{MSE}(\hat{\theta}) &= \mathbb{E}[(\hat{\theta}-\theta_0)^2]\\  
+\mbox{MSE}(\hat{\theta}) &= \mathbb{E}[(\hat{\theta}-\theta_0)^2]\\
 &= \mathbb{E}\left[(\hat{\theta}-\mathbb{E}[\hat{\theta}])^2+2\hat{\theta}\mathbb{E}[\hat{\theta}]-\mathbb{E}[\hat{\theta}]^2-2\hat{\theta}\theta_0+\theta_0^2\right]\\
 &=\mbox{Var}(\hat{\theta})+\mathbb{E}[\hat{\theta}]^2-2\mathbb{E}[\hat{\theta}]\theta_0+\theta_0^2\\
 &=\mbox{Var}(\hat{\theta})+\mbox{Bias}^2(\hat{\theta})
@@ -225,23 +225,23 @@ We can conclude with :
 \\
 It is interesting to notice that when n increases, $\hat{\theta}_{\mbox{Bayes}}$ gets closer to the sample average (uses
 information from the sample) and When $\sigma$ is small, $\hat{\theta}_{\mbox{Bayes}}$ gets closer to $\mu$ (little uncertainty
-about the prior). 
+about the prior).
 
 \section{Linear regression}
 
 The goal of a {\em linear regression} is to approximate the law followed by our data \(\textit{y}\) by a linear combination of observed variables \(\xx\) such as :
 \[ f(\xx|\beta)= \displaystyle\sum_{j=1}^{p} \beta_j*x_j + \beta_0\]
-with \(\xx^i \in \mathbb{R}^p\)  and \(\textit{y}^i \in \mathbb{R}\) and noting \(\dd = {\{\xx^i,\textit{y}^i\}}_{\textit{i}=1,..,\textit{n}}\). 
+with \(\xx^i \in \mathbb{R}^p\)  and \(\textit{y}^i \in \mathbb{R}\) and noting \(\dd = {\{\xx^i,\textit{y}^i\}}_{\textit{i}=1,..,\textit{n}}\).
 \begin{center}
 \includegraphics[width=100mm]{linear_regression_example.png}
 \end{center}
 
-We assume that the error \(\epsilon\) we have while doing a regression is \textbf{Gaussian distributed}. Therefore, with \(y = g(\xx) + \epsilon \),  \(f(\xx|\beta)\) being \(g\)'s estimator, we have : 
+We assume that the error \(\epsilon\) we have while doing a regression is \textbf{Gaussian distributed}. Therefore, with \(y = g(\xx) + \epsilon \),  \(f(\xx|\beta)\) being \(g\)'s estimator, we have :
 \begin{center}
 \(\epsilon = y - g(\xx)\) and \(\epsilon\sim{}\mathcal{N}(0,{\sigma}^2)\)
 \end{center}
 
-We therefore have our \(\dd = {\{\xx^i,\textit{y}^i\}}_{\textit{i}=1,..,\textit{n}}\) observations (the blue dots), the linear regression obtained \(\mathbb{E}(y|x) = \beta*x + \beta_0\) and, for each new \(x^*\) point, we can compute the hypothetical \(y^* = \mathbb{E}(y|x^*)\) value and the corresponding error \(\epsilon^* \) and confidence interval given by \(p(y|x^*)\) since : 
+We therefore have our \(\dd = {\{\xx^i,\textit{y}^i\}}_{\textit{i}=1,..,\textit{n}}\) observations (the blue dots), the linear regression obtained \(\mathbb{E}(y|x) = \beta*x + \beta_0\) and, for each new \(x^*\) point, we can compute the hypothetical \(y^* = \mathbb{E}(y|x^*)\) value and the corresponding error \(\epsilon^* \) and confidence interval given by \(p(y|x^*)\) since :
 \[p(y|\xx)\sim{}\mathcal{N}(f(\xx|\beta),{\sigma}^2)\]
 \begin{center}
 \includegraphics[width=100mm]{LR_2.png}
@@ -251,14 +251,14 @@ We therefore have our \(\dd = {\{\xx^i,\textit{y}^i\}}_{\textit{i}=1,..,\textit{
 
 We are now going to use the \textit{maximum likelihood estimation} in order to find the best linear regression possible to fit the data and predict new points. \\
 \\
-Under Gaussian noise, considering i.i.d. observations and with \(p(y|\xx)\sim{}\mathcal{N}(f(\xx|\beta),{\sigma}^2)\), the log-likelihood defined earlier becomes : 
+Under Gaussian noise, considering i.i.d. observations and with \(p(y|\xx)\sim{}\mathcal{N}(f(\xx|\beta),{\sigma}^2)\), the log-likelihood defined earlier becomes :
 \begin{align*}
 \mathcal{L}(\beta|\dd) &= \log\displaystyle\prod_{i=1}^{n} p(y^i|\xx^i) + \log\displaystyle\prod_{i=1}^{n} p(\xx^i) \\  &= \log \left(\displaystyle\prod_{i=1}^{n} \frac{1}{\sqrt{2\pi}\sigma}*exp\left[ - \frac{(y^i - f(\xx^i|\beta))^2}{2\sigma^2} \right] \right ) + Cte  \\
 & = Cte - \frac{1}{2\sigma^2} \displaystyle\sum_{i=1}^{n} (y^i - f(\xx^i|\beta))^2
 \end{align*}
 Since \(\log\displaystyle\prod_{i=1}^{n} p(\xx^i)\) is independent of \(\beta\), its value is added to a term \(Cte\) along with others. \\
-Assuming Gaussian error, maximizing the likelihood \(\mathcal{L}(\beta|\dd)\) is therefore equivalent to minimizing the sum of squared residuals \(\displaystyle\sum_{i=1}^{n} (y^i - f(\xx^i|\beta))^2\). 
-This expression of the residual sum of squares can also be written in matrix form : 
+Assuming Gaussian error, maximizing the likelihood \(\mathcal{L}(\beta|\dd)\) is therefore equivalent to minimizing the sum of squared residuals \(\displaystyle\sum_{i=1}^{n} (y^i - f(\xx^i|\beta))^2\).
+This expression of the residual sum of squares can also be written in matrix form :
 \begin{align*}
 RSS(\beta) &= \displaystyle\sum_{i=1}^{n} (y^i - f(\xx^i))^2 \\  &= \displaystyle\sum_{i=1}^{n} \left( y^i - \beta_0 - \displaystyle\sum_{j=1}^{p} x_j^i \beta_j \right)^2 \\
 & = (y - \textbf{\textit{X}} \beta)^T * (y - \textbf{\textit{X}} \beta)
@@ -269,7 +269,7 @@ with \(\textbf{\textit{X}} = \left( \begin{array}{ccccc}
 . & . & . & ... & .\\
 . & . & . & ... & .\\
 . & . & . & ... & .\\
-1 & x_1^n & x_2^n & ... & x_p^n \end{array} \right) \). 
+1 & x_1^n & x_2^n & ... & x_p^n \end{array} \right) \).
 Here, we added a vector \(\left( \begin{array}{c}
 1 \\
 1 \\
@@ -277,38 +277,38 @@ Here, we added a vector \(\left( \begin{array}{c}
 . \\
 . \\
 1 \end{array} \right)\) to \({\{\xx^i\}}_{\textit{i}=1,..,\textit{n}}\) in  \(\textbf{\textit{X}}\)'s expression in order to compute the scalar \(\beta_0\). \\
-\\ 
-Historically, the use of the residual sum of squares minimization can be attributed to Carl Friedrich Gauss (to predict the location of Ceres) and Adrien Marie Legendre. 
+\\
+Historically, the use of the residual sum of squares minimization can be attributed to Carl Friedrich Gauss (to predict the location of Ceres) and Adrien Marie Legendre.
 \\
 \\
 \textbf{In this method, under which conditions is \(\beta\)'s estimator unique ? }
 \\
 
 \begin{itemize}
-\item 
-In order to minimize \(RSS(\beta)\), \(\textbf{\textit{X}}\) must have a full column rank, hence \(\textbf{\textit{X}}^T\textbf{\textit{X}}\) \textit{invertible}. In this case, the \(\beta\) minimizing \(RSS(\beta)\) is : 
+\item
+In order to minimize \(RSS(\beta)\), \(\textbf{\textit{X}}\) must have a full column rank, hence \(\textbf{\textit{X}}^T\textbf{\textit{X}}\) \textit{invertible}. In this case, the \(\beta\) minimizing \(RSS(\beta)\) is :
 \[\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\]
-\item 
+\item
 If \(\textbf{\textit{X}}^T\textbf{\textit{X}}\) is not invertible (or \textit{rank-deficient}), we can use its pseudo-inverse. However, when doing so, we must keep in mind that the solution is \textit{not} unique. \\ A pseudo-inverse of\textbf{ A} is a matrix \textbf{G} such as \textbf{AGA = A}.
 \end{itemize}
- 
+
 
 
 \subsection{Gauss-Markov Theorem}
 
-\textbf{Gauss-Markov Theorem :} Under the assumption that \(\epsilon\sim{}\mathcal{N}(0,{\sigma}^2)\), the least-squares estimator of \(\beta\) is its best linear unbiased estimator. This Best Linear Unbiased Estimator is unique if \(\textbf{\textit{X}}^T\textbf{\textit{X}}\) is invertible. We call it the "\textit{BLUE}". 
+\textbf{Gauss-Markov Theorem :} Under the assumption that \(\epsilon\sim{}\mathcal{N}(0,{\sigma}^2)\), the least-squares estimator of \(\beta\) is its best linear unbiased estimator. This Best Linear Unbiased Estimator is unique if \(\textbf{\textit{X}}^T\textbf{\textit{X}}\) is invertible. We call it the "\textit{BLUE}".
 \\
 \\
-Indeed, with \(\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\), we can show that (demonstration of the Gauss-Markov Theorem) : 
+Indeed, with \(\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\), we can show that (demonstration of the Gauss-Markov Theorem) :
 \begin{center}
 \(\forall \beta^*\) unbiased estimator of \(\beta\), \(\mathbb{V}ar(\beta^*) \geq \mathbb{V}ar(\hat{\beta})\) and when \(\mathbb{V}ar(\beta^*) = \mathbb{V}ar(\hat{\beta}) => \beta^* = \hat{\beta} \)
 \end{center}
 \vspace{1cm}
 
-\textbf{Proof of the Gauss-Markov theorem :} 
-\\ We have \(\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\) \textit{BLUE} estimator and let \(\beta^* = A y\) be another linear estimator of \(\beta\). As we're restricting to unbiased estimators, minimum mean squared error implies minimum variance. The goal is therefore to show that such an estimator has a variance no smaller than that of \(\hat{\beta}\). 
-We have \(A = (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D\) where \(D\) is a non-zero matrix. 
-\\ In order to have \(\beta^*\) unbiased, we compute: 
+\textbf{Proof of the Gauss-Markov theorem :}
+\\ We have \(\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\) \textit{BLUE} estimator and let \(\beta^* = A y\) be another linear estimator of \(\beta\). As we're restricting to unbiased estimators, minimum mean squared error implies minimum variance. The goal is therefore to show that such an estimator has a variance no smaller than that of \(\hat{\beta}\).
+We have \(A = (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D\) where \(D\) is a non-zero matrix.
+\\ In order to have \(\beta^*\) unbiased, we compute:
 \begin{align*}
 \mathbb{E}[\beta^*] &= \mathbb{E}[Ay] \\  &= \mathbb{E}[((\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D)(\textit{\textbf{X}}\beta + \epsilon)] \\
 & = ((\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D)\textit{\textbf{X}}\beta + ((\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D)\mathbb{E}[\epsilon] \\ &= ((\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D)\textit{\textbf{X}}\beta \\ &=  (\textit{\textbf{I}} + D\textit{\textbf{X}})\beta
@@ -316,30 +316,30 @@ We have \(A = (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X
 Now, we calculate and compare the variances :
 \begin{align*}
 \mathbb{V}ar(\hat{\beta}) &= \mathbb{E}[((\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T \epsilon \epsilon^T \textit{\textbf{X}} (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1}] \\  &= (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T * \sigma \textit{\textbf{I}} * \textit{\textbf{X}} (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \\
-& = \sigma^2 (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} 
+& = \sigma^2 (\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1}
 \end{align*}
 \begin{align*}
 \mathbb{V}ar(\beta^*) &= \mathbb{V}ar(Ay)  \\  &= A\mathbb{V}ar(y)A^T \\
 & = \sigma^2*AA^T \\ &= \sigma^2*((\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D)(\textit{\textbf{X}}^T \textit{\textbf{X}})^{-1} \textit{\textbf{X}}^T + D)^T \\ &= \sigma^2[(\textit{\textbf{X}}^T\textit{\textbf{X}})^{-1} + (\textit{\textbf{X}}^T\textit{\textbf{X}})^{-1}(D\textit{\textbf{X}})^T + D(\textit{\textbf{X}}(\textit{\textbf{X}}^T\textit{\textbf{X}})^{-1} + DD^T] \\ &= \sigma^2\textit{\textbf{X}}^T\textit{\textbf{X}})^{-1} + \sigma^2 DD^T \\ &= \mathbb{V}ar(\hat{\beta}) + \sigma^2 DD^T
 \end{align*}since \(DX = 0\). \\
-Therefore \(\mathbb{V}ar(\beta^*) = \sigma^2 D D^T +  \mathbb{V}ar(\hat{\beta})\) and since \(\sigma^2 D D^T \) is positive semi-defined and minimal for \(D = 0\),  \(\mathbb{V}ar(\beta^*)\) exceeds \(\mathbb{V}ar(\hat{\beta})\).  
+Therefore \(\mathbb{V}ar(\beta^*) = \sigma^2 D D^T +  \mathbb{V}ar(\hat{\beta})\) and since \(\sigma^2 D D^T \) is positive semi-defined and minimal for \(D = 0\),  \(\mathbb{V}ar(\beta^*)\) exceeds \(\mathbb{V}ar(\hat{\beta})\).
 
 
 \subsection{Interpretation with correlated or uncorrelated variables}
 
-The interpretation of the coefficients of a linear regression can be tricky. Indeed, once we have found \(\beta_0,...,\beta_p\) such as : 
+The interpretation of the coefficients of a linear regression can be tricky. Indeed, once we have found \(\beta_0,...,\beta_p\) such as :
 \[f(\textbf{\textit{X}}) = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p\]
-we first have to study the correlation of the variables. 
+we first have to study the correlation of the variables.
 \begin{itemize}
 \item If the variables are \textit{decorrelated}, each coefficient can be estimated separately and the interpretation is thus easy : "A change in 1 in \(x_j\) is associated with a change of \(\beta_j\) in Y, while everything else stays the same."
 \end{itemize}
 \begin{itemize}
-\item This interpretation is no longer true if the variables are \textit{correlated}. The correlations between variables cause problems : the variance of all coefficients tend to increase and the interpretation is much harder (when \(x_j\) changes, so does everything else). 
+\item This interpretation is no longer true if the variables are \textit{correlated}. The correlations between variables cause problems : the variance of all coefficients tend to increase and the interpretation is much harder (when \(x_j\) changes, so does everything else).
 \end{itemize}
 
 \section{Logistic regression}
 
-\paragraph{What about classification ?} 
+\paragraph{What about classification ?}
 There are different conceptual issues with linear regression that make it unsuitable for classification. The main one is that we can't model the probability \(P(y=1|\xx)\) as a linear function of $\xx$ because it must be between 0 and 1. Moreover, this cannot model "diminishing returns" where the impact of a change in $\xx$ is not constant along the probability range. Indeed, if \(P(y=1|\xx)\) is close to 0 or +1, $\xx$ must change a lot for y to change and this is not the case when \(P(y=1|\xx)\) is close to 0.5. \\
 Hence we use a \textbf{logit transformation} through a \textit{logistic regression}.\\
 
@@ -363,9 +363,9 @@ As usual, let's compute the log likelihood for this logistic regression, knowing
 \\
 \[\mathcal{L}(\beta|\dd) = \displaystyle\sum_{i=1}^{n} log P(y^i|\xx^i) + Cte = \displaystyle\sum_{i=1}^{n} (y^i \log g^i + (1-y^i) \log(1-g^i))\]
 \begin{center}
-with \(g = P(y=1|\xx) = \frac{1}{1+e^{-\beta^T\xx}}\) 
+with \(g = P(y=1|\xx) = \frac{1}{1+e^{-\beta^T\xx}}\)
 \end{center}
-We find the maximum of the log-likelihood by calculating its gradient \(\nabla_{\beta}\mathcal{L}\): 
+We find the maximum of the log-likelihood by calculating its gradient \(\nabla_{\beta}\mathcal{L}\):
 
 \[\nabla_{\beta}g^i = \xx^i g^i (1-g^i)\]
 
@@ -393,13 +393,13 @@ Other methods remain possible such as the Newton method, conjugate gradient asce
 
 \section{Summary}
 
-The main points to keep in mind from this lesson are the following : 
+The main points to keep in mind from this lesson are the following :
 \begin{itemize}
 \item MAP estimate : \(\hat{\theta}_{\mbox{MAP}}=\arg\underset{\theta}\max \  p(\theta|\mathcal{X})\)
 \item MLE : \(\hat{\theta}_{\mbox{MLE}}=\arg\underset{\theta}\max \  p(\mathcal{X}|\theta)\)
 \item Bayes estimate : \(\hat{\theta}_{\mbox{Bayes}}=\mathbb{E}[\theta|\mathcal{X}]=\int{\!\theta p(\theta|\mathcal{X})d\theta}\)
-\item Assuming a Gaussian error, maximizing the likelihood (MLE) is equivalent to minimizing the RSS (residual sum of squares). 
-\item Linear regression MLE : \(\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\) 
-\item Logistic regression : to solve with gradient ascent. 
+\item Assuming a Gaussian error, maximizing the likelihood (MLE) is equivalent to minimizing the RSS (residual sum of squares).
+\item Linear regression MLE : \(\hat{\beta} = (\textbf{\textit{X}}^T\textbf{\textit{X}})^{-1} \textbf{\textit{X}}^T y\)
+\item Logistic regression : to solve with gradient ascent.
  \end{itemize}
 \end{document}
